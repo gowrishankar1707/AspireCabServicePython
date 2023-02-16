@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
+from .models import User
 
 def masterApp(request):
-    template=loader.get_template('baseHtml.html')
-    return HttpResponse(template.render())
+    userList=User.objects.all()
+    userdict={'user':userList}
+    return render(request,'baseHtml.html',context=userdict)
 
 def helpPage(request):
     helpString={'help':'This is help Page'}
