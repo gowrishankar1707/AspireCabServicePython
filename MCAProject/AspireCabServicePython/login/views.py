@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 def login(request):
-    template=loader.get_template('login.html')
-    return HttpResponse(template.render() )
-
+    sampleDict={'hello':"Hi Im Gowrishankar"}
+    return render(request,'login.html',context=sampleDict)
 # Create your views here.
