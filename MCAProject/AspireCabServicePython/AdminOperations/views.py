@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from MasterApp import models
 from .forms import registerUserForm
+from datetime import date
 
 
 # Create your views here.
@@ -16,11 +17,17 @@ def registerUsers(request):
     registerUser=registerUserForm.registerUser()
     
     if request.method == 'POST':
-        print('hello')
         registerUser=registerUserForm.registerUser(request.POST)
-        print('hello')
         if registerUser.is_valid():
-            print('registered successfully')
+            try:
+
+                commitedObj= registerUser.save(commit=False)
+                commitedObj.createdDate=date.today()
+                commitedObj.updatedDate=date.today()
+                commitedObj.save()
+                print('registered successfully')
+            except:
+                raise Exception()
         else:
             print('****************************')
     return render(request,'registerUser.html',{'registerUser':registerUser})

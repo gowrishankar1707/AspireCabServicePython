@@ -8,10 +8,10 @@
         <h1 class="modal-header">Hello World</h1>
         <p class="card-header">Aspire Cab Service</p>
         {% block content %}
-            <a href="/listRegisteredUser" class="btn btn-primary" type="button">ListUsers</a>
-            <a href="/login" class="btn btn-primary" type="button">login</a>
-            <a href="/help" class="btn btn-primary" type="button">Help</a> 
-            <a href="/registerUser" class="btn btn-primary" type="button">RegisterUser</a>   
+            <a href="{% url 'listRegisteredUser' %}" class="btn btn-primary" type="button">ListUsers</a>
+            <a href="{% url 'login' %}" class="btn btn-primary" type="button">login</a>
+            <a href="{% url 'help' %}" class="btn btn-primary" type="button">Help</a> 
+            <a href="{% url 'registerUser' %}" class="btn btn-primary" type="button">RegisterUser</a>   
         {% endblock %}
     </body>
 </html>
