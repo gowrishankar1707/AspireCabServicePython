@@ -1,24 +1,36 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from .Forms import login_form
-from MasterApp import models
-def login(request):
-    loginForm=login_form.loginForm()
+from django.contrib.auth import login,authenticate,logout
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
+
+def login_view(request):
+
+    
 
     if request.method == 'POST':
-        loginForm=login_form.loginForm(request.POST)
-        if loginForm.is_valid():
-            userName=loginForm.cleaned_data['userName']
-            password=loginForm.cleaned_data['password']
-            checkUserAvailability:bool=models.User.objects.all().filter(userEmailId=userName,password=password)
-            if checkUserAvailability:
-                print("User logged in ")
+        userName=request.POST.get('username')
+        password=request.POST.get('password')
+
+        user=authenticate(username=userName,password=password)
+
+        if user:
+            if user.is_active:
+
+                login(request,user)
+                return HttpResponseRedirect(reverse("masterApp"))
             else:
-                print("***************************")
+                return HttpResponse("User is not activate")
+        else:
+            return render(request,"login.html",{'InCorrectCredentialls':"UserName or Password Is Incorrect"})
+    return render(request,"login.html")
 
+@login_required
+def logout_view(request):
+    logout(request)
+    return render(request,'baseHtml.html',{"logoutStatus":"Logout Completed"})
 
-
-            return render(request,'login.html',{'form':loginForm})
-    return render(request,'login.html',{'form':loginForm})
 # Create your views here.

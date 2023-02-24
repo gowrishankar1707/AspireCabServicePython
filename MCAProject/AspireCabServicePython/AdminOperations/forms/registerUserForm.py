@@ -4,16 +4,17 @@ from MasterApp import models
 from django.core import validators
 
 class registerUser(forms.ModelForm):
-    userEmailId=forms.EmailField(validators=[validators.MaxLengthValidator(30)],required=True)
-    firstName=forms.CharField(validators=[validators.MaxLengthValidator(30)],required=True)
-    lastName=forms.CharField(validators=[validators.MaxLengthValidator(30)],required=True)
-    password=forms.CharField(validators=[validators.MaxLengthValidator(30)],required=True,widget=forms.PasswordInput)
-    confirmPassword=forms.CharField(validators=[validators.MaxLengthValidator(30)],required=True,widget=forms.PasswordInput)
-    DOB=forms.DateField(required=True,widget=forms.DateInput(format='%d/%m/%Y'))
-    phoneNumber=PhoneNumberField(region='In')
-    address=forms.Textarea()
     image=forms.ImageField(required=False)
+    class Meta:
+        model=models.UserRegistration
+        exclude=['userRole','updatedDate','user']
+
+
+class userModelForm(forms.ModelForm):
+    username=forms.CharField(max_length=30,validators=[validators.MaxLengthValidator(30)])
+    password=forms.CharField(max_length=15,widget=forms.PasswordInput)
+    email=forms.CharField(widget=forms.EmailInput)
 
     class Meta:
         model=models.User
-        exclude = ('userRole','createdDate','updatedDate',)
+        fields=['username','password','first_name','last_name','email']

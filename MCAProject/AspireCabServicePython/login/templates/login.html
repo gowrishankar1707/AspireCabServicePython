@@ -6,11 +6,25 @@
     <head>
     </head>
     <body>
-       <form method="POST" class="form-group">
-            {{ form.as_p }}
-            {% csrf_token %}
+        {% if InCorrectCredentialls %}
+        <div class="container-fluid">
+            {{ InCorrectCredentialls }}
+        </div>
+        {% endif %}
+       <form method="POST" action="{% url 'login_view' %}" class="form-group">
+        <div class="form-group">
+            <label>Username</label>
+            <input name="username" class="form-control" type="text" placeholder="please enter the Username">
+        </div>
+        <div class="form-group">
+            <label >password</label>
+            <input type="password" class="form-control" name="password" placeholder="Please Enter the password">
+        </div>
+        <div class="form-group">
             <button type="submit" class="btn btn-primary">Login</button>
             <a type="button" href="{% url 'masterApp' %}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+        {% csrf_token %}
        </form>
        
     </body>
