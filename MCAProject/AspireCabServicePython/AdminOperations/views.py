@@ -2,18 +2,21 @@ from django.shortcuts import render
 from MasterApp import models
 from .forms.registerUserForm import userModelForm,registerUser
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from datetime import date
 
 
 # Create your views here.
 
 @login_required
+@staff_member_required
 def listRegisteredUser(request):
     listUsers=models.User.objects.all()
     dictUsers={'listUsers' : listUsers}
     return render(request,'listRegisteredUser.html',context=dictUsers)
 
 @login_required
+@staff_member_required
 def registerUsers(request):
     registerUserObj=registerUser()
     UserModelObj=userModelForm()
@@ -43,3 +46,9 @@ def registerUsers(request):
         else:
             print('****************************')
     return render(request,'registerUser.html',{'registerUser':registerUserObj,'userObj':UserModelObj})
+
+@login_required
+@staff_member_required
+def addCabView(request):
+    return render(request,'addCab.html')
+
