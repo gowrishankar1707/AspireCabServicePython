@@ -4,6 +4,8 @@ from .forms.registerUserForm import userModelForm,registerUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from datetime import date
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 # Create your views here.
@@ -28,7 +30,7 @@ def registerUsers(request):
             try:
                 userCommit=UserModelObj.save()
                 userCommit.set_password(userCommit.password)
-                userCommit.save()
+                
 
 
 
@@ -36,8 +38,13 @@ def registerUsers(request):
                 commitedObj= registerUserObj.save(commit=False)
                 commitedObj.user=userCommit
                 commitedObj.updatedDate=date.today()
+                if 'userProfilePicture' in request.FILES:
+                    commitedObj.image=request.FILES['userProfilePicture']
+
+                
+                userCommit.save()
                 commitedObj.save()
-                print('registered successfully')
+                return render(request,'registerUser.Html',{'registerMessage':'Registered '})
             except:
                 raise Exception('Gowri')
         else:

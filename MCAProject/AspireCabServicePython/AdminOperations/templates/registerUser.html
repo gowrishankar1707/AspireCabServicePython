@@ -6,6 +6,10 @@
         
     </head>
     <body>
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Success!</strong> {{ registerMessage }}
+          </div>
         <form method="POST" class="container-fluid form-group">
             {{ userObj.as_p }}
             {{ registerUser.as_p }}

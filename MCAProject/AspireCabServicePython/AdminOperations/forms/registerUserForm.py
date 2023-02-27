@@ -5,9 +5,10 @@ from django.core import validators
 
 class registerUser(forms.ModelForm):
     image=forms.ImageField(required=False)
+    user=forms.CharField(required=False)
     class Meta:
         model=models.UserRegistration
-        exclude=['userRole','updatedDate','user']
+        exclude=['updatedDate']
 
 
 class userModelForm(forms.ModelForm):
