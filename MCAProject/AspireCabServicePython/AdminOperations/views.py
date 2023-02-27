@@ -34,10 +34,7 @@ def registerUsers(request):
 
 
                 commitedObj= registerUserObj.save(commit=False)
-                commitedObj.userRole='E'
-                print(userCommit)
                 commitedObj.user=userCommit
-
                 commitedObj.updatedDate=date.today()
                 commitedObj.save()
                 print('registered successfully')

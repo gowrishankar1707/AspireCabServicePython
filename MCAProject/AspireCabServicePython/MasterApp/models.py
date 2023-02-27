@@ -5,8 +5,10 @@ from django.contrib.auth.models import User
 
 class UserRole(models.Model):
     
-    userRole=models.CharField(max_length=1,unique=True)
-
+    userRole=models.CharField(max_length=1,unique=True,default='E')
+    def __str__(self) -> str:
+        return self.userRole
+    
 class UserRegistration(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     DOB=models.DateField(null=False,max_length=10)
@@ -14,7 +16,10 @@ class UserRegistration(models.Model):
     phoneNumber=models.CharField(max_length=10,unique=True,null=False)
     address=models.CharField(max_length=254,null=True)
     image=models.ImageField(null=True,upload_to='userProfilePicture')
-    userRole=models.ForeignKey(UserRole,on_delete=models.SET_DEFAULT,to_field='userRole',default=2,null=True)
+    userRole=models.ForeignKey(UserRole,on_delete=models.DO_NOTHING,to_field='userRole',default='E')
+
+    def __str__(self):
+        return self.user.username;
 
 
 
