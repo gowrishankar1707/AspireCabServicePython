@@ -3,10 +3,13 @@ from MasterApp import models
 from .forms.registerUserForm import userModelForm,registerUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.utils.decorators import *
 from datetime import date
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.generic import *
 
+commonDecorators=[login_required,staff_member_required]
 
 # Create your views here.
 
@@ -51,8 +54,11 @@ def registerUsers(request):
             print('****************************')
     return render(request,'registerUser.html',{'registerUser':registerUserObj,'userObj':UserModelObj})
 
-@login_required
-@staff_member_required
-def addCabView(request):
-    return render(request,'addCab.html')
+
+@method_decorator(commonDecorators,name='dispatch')
+class AddCab(CreateView):
+    fields=['cabName','noOfSeats']
+    model=models.Cab
+    template_name='addCab.html'
+    
 

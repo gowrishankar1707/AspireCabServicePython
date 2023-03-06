@@ -17,6 +17,20 @@ class UserRegistration(models.Model):
         return self.user.username;
 
 
+class Cab(models.Model):
+    cabName=models.CharField(max_length=30)
+    noOfSeats=models.IntegerField()
+
+    def __str__(self):
+        return self.cabName
+
+
+
+
+
+
+
+
 
 
 

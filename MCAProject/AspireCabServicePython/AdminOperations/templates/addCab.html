@@ -10,14 +10,8 @@
 </head>
 <body>
     <form action="{% url 'addCabView' %}" method="post">
-        <div class="mb-3 mt-3">
-            <label  class="form-label">No.Of.Cab Seats</label>
-            <input type="text" class="form-control" name="CabSeats" placeholder="please enter the no of cab seats">
-        </div>
-        <div class="mt-3">
-            <label  class="form-label">CabNo</label>
-            <input type="text" class="form-control" name="CabNo" placeholder="please enter the Cab No">
-        </div>
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Add Cab</button>
         <a href="{% url 'masterApp' %}" type="button" class="btn btn-primary">Cancel</a>
     </form>
