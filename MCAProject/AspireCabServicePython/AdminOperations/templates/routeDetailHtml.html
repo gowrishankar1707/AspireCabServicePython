@@ -1,0 +1,25 @@
+{% extends 'baseHtml.html' %}
+{% block content %}
+    {% if routeDetailObj%}
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{ routeDetailObj.routeName }}</div>
+        <div class="panel-body"><span class="">CabName:</span>{{ routeDetailObj.cab.cabName }}</div>
+        <div class="panel-body"><span>noOfSeats:</span>{{ routeDetailObj.cab.noOfSeats }}</div>
+        <div class="panel-body"><span>Shift:</span>{{ routeDetailObj.shift }}</div>
+        <div class="panel-body"><span>Timing:</span>{{ routeDetailObj.timingDescription }}</div>
+        <div class="panel-body"><span>Route:</span>{{ routeDetailObj.routeDescription }}</div>
+    </div>
+    {% endif %}
+    <!---
+    <div>
+        <a href="{% url 'masterApp' %}" type="button" class="btn btn-primary">Back To Main Page</a>
+
+        <a href="{% url 'CabList' %}" type="button" class="btn btn-primary">Back To CabList</a>
+        {% if cabDetailObject%}
+
+        <a href="{% url 'cabUpdate' pk=cabDetailObject.id %}" type="button" class="btn btn-warning">Update</a>
+        <a href="{% url 'cabDelete' pk=cabDetailObject.id %}" type="button" class="btn btn-danger">Delete</a>
+        {% endif %}
+    </div>
+-->
+{% endblock %}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends 'baseHtml.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>RouteList</title>
+</head>
+<body>
+
+    {% if routeListObj %}
+    {% for route in routeListObj %}
+        
+       <a type="button"  href="{% url 'RouteDetail' pk=route.id %}">
+        <div class="panel panel-primary">
+            <div class="panel-heading">{{ route.routeName}}</div>
+            <div class="panel-body">
+                <div>{{ route.routeName}}</div>
+                <div> {{route.timingDescription}} </div>
+
+            </div>
+          </div>
+        </a>
+        
+    {% endfor %}
+    <a href="{% url 'masterApp' %}" type="button" class="btn btn-primary">Back To Main Page</a> 
+    {% else %}
+    <div class="alert alert-primary" role="alert">
+       There is no list. so please <a href="{% url 'masterApp' %}" type="button" class="btn btn-primary">click here</a> to go back to Main page
+      </div>
+
+    {% endif %}
+    
+    
+</body>
+</html>
+{% endblock %}

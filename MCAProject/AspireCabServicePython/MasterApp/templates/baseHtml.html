@@ -31,6 +31,18 @@
 
                 <a href="{% url 'addCabView' %}" class="nav-link">AddCab</a>
             </li>
+            <li >
+
+                <a href="{% url 'CabList' %}" class="nav-link">CabLists</a>
+            </li>
+            <li >
+
+                <a href="{% url 'AddRoute' %}" class="nav-link">AddRoute</a>
+            </li>
+            <li >
+
+                <a href="{% url 'RouteList' %}" class="nav-link">RouteList</a>
+            </li>
                 {% endif %}
                 <li>
                     {% if user.is_authenticated %}

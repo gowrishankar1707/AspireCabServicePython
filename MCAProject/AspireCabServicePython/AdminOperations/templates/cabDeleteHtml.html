@@ -1,0 +1,11 @@
+{% extends 'baseHtml.html' %}
+{% block content %}
+    <form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }} ,{{ object.noOfSeats }}"?</p>
+    {{ form }}
+    <button type="submit" class="btn btn-primary">Confirm</button>
+    <a  class="btn btn-danger" href="{% url 'cabDetail' pk=object.id %}">Cancel</a>
+
+</form>
+
+{% endblock %}

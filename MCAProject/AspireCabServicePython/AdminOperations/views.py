@@ -6,19 +6,13 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import *
 from datetime import date
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from django.views.generic import *
 
 commonDecorators=[login_required,staff_member_required]
 
 # Create your views here.
 
-@login_required
-@staff_member_required
-def listRegisteredUser(request):
-    listUsers=models.User.objects.all()
-    dictUsers={'listUsers' : listUsers}
-    return render(request,'listRegisteredUser.html',context=dictUsers)
 
 @login_required
 @staff_member_required
@@ -60,5 +54,74 @@ class AddCab(CreateView):
     fields=['cabName','noOfSeats']
     model=models.Cab
     template_name='addCab.html'
+
+
+@method_decorator(commonDecorators,name='dispatch')
+class ViewCabList(ListView):
+    context_object_name='cabLists'
+    model=models.Cab
+    template_name='cabList.html'
+   
     
+
+@method_decorator(commonDecorators,name='dispatch')
+class CabDetailedView(DetailView):
+    context_object_name='cabDetailObject'
+    model=models.Cab
+    template_name='cabDetail.html'
+
+
+@method_decorator(commonDecorators,name='dispatch')
+class UpdateCabView(UpdateView):
+    model=models.Cab
+    fields=['cabName','noOfSeats']
+    context_object_name='updateCabObj'
+    template_name='updateCabHtml.html'
+
+
+@method_decorator(commonDecorators,name='dispatch')
+class DeleteCabView(DeleteView):
+    model=models.Cab
+    template_name='cabDeleteHtml.html'
+    success_url = reverse_lazy('CabList')
+
+
+
+
+@method_decorator(commonDecorators,name='dispatch')
+class listRegisteredUser(ListView):
+
+    
+    model=models.UserRegistration
+    queryset = models.UserRegistration.objects.order_by('-user')
+    context_object_name='usersList'
+    template_name='listRegisteredUser.html'
+
+"""
+Route Table Crud Operations
+"""
+@method_decorator(commonDecorators,name='dispatch')
+class AddRoute(CreateView):
+    model=models.Route
+    fields=['routeName','cab','shift','timingDescription','routeDescription']
+    template_name='addRouteHtml.html'
+
+@method_decorator(commonDecorators,name='dispatch')
+class RouteDetail(DetailView):
+    model=models.Route
+    context_object_name='routeDetailObj'
+    template_name='routeDetailHtml.html'
+
+@method_decorator(commonDecorators,name='dispatch')
+class RouteList(ListView):
+    model=models.Route
+    context_object_name='routeListObj'
+    template_name='routeListHtml.html'
+
+
+
+
+
+
+
 

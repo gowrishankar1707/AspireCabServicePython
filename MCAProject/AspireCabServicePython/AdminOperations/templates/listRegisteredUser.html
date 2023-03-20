@@ -5,18 +5,11 @@
     <head>
     </head>
     <body>
-        {% if listUsers %}
+        {% if usersList %}
 
-            {% for userIter in listUsers %}
-                <div>
-                    <span class="list-group">{{ userIter.userEmailId }}</span>
-                    <span class="list-group">{{ userIter.firstName }}</span>
-                    <span class="list-group">{{ userIter.lastName }}</span>
-                    <span class="list-group">{{ userIter.DOB }}</span>
-                    <span class="list-group">{{ userIter.createdDate }}</span>
-                    <span class="list-group">{{ userIter.updatedDate }}</span>
-                    <span class="list-group"> <img src="{{userIter.image}}" height="50" width="50"></span>
-                </div>
+            {% for userIter in usersList %}
+            <ul class="list-group">
+                <li class="list-group-item">{{userIter.user.username}}</li>
             {% endfor %}
         {% endif %}  
         <div>
