@@ -22,6 +22,7 @@ urlpatterns=[
     path('',include('login.urls')),
     path('',include('MasterApp.urls')),
     path('',include('AdminOperations.urls')),
+    path('',include('UserOperations.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

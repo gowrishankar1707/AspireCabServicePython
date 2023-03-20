@@ -44,11 +44,26 @@
                 <a href="{% url 'RouteList' %}" class="nav-link">RouteList</a>
             </li>
                 {% endif %}
+
+                {% if user.is_authenticated %}
+                {% if not request.user.is_staff %}
                 <li>
-                    {% if user.is_authenticated %}
+                    
+                    <a href=""  class="nav-link">Book Cab</a>
+               </li>
+               <li>
+                    
+                <a href=""  class="nav-link">Cancel Cab</a>
+                 </li>
+               {% endif %}
+                <li>
+                    
                          <a href="{% url 'logout_view' %}"  class="nav-link">Logout</a>
-                    {% endif %}
+                    
                 </li>
+                {% endif %}
+               
+
              </ul>
         </div>
         </nav>
