@@ -1,0 +1,37 @@
+{% extends 'baseHtml.html' %}
+{% load mathfilters %}
+{% load bookedSeats%}
+{% block content %}
+{% include 'getDay.html' %}
+
+{% if routeList|length > 0 and bookedSeats|length > 0 and cabDate|length > 0%}
+<div class="container">
+    <h1>{{ cabDate }}</h1>
+  </div>
+
+  
+    
+
+    {% for route in routeList %}
+    <form action="{% url 'bookCabPOST' route=route.id cabDate=cabDate %}"method="post">
+        
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">{{ route.routeName }}</div>
+                  <div class="panel-body"> Description : {{ route.routeDescription }}</div>
+                  <div class="panel-body">Time : {{ route.timingDescription }}</div>
+                  <div class="panel-body">shift : {{ route.shift }}</div>
+                  <div class="panel-body">No of seats available : {{ bookedSeats|bookedSeatNo:route.routeName}}</div>
+                    <button type="submit" class="btn btn-primary" style="margin-bottom: 5px; margin-left: 15px;">Book Cab</button>
+
+                </div>
+               
+            </div>
+
+                {% csrf_token %}
+            </form>
+       
+
+    {% endfor %}
+{% endif %}
+{% endblock %}

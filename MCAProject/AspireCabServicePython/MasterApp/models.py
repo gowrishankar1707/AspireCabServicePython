@@ -52,7 +52,7 @@ class CabBooking(models.Model):
     bookedDate=models.DateField(blank=True)
 
     def __str__(self) -> str:
-        return self.userRe.user.username+"_"+self.bookedDate+"_"+self.shift
+        return self.userRe.user.username+"_"+self.bookedDate.strftime('%Y-%m-%d')+"_"+self.shift
 
 
 

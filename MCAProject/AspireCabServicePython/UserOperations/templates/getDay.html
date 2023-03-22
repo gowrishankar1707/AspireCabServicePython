@@ -1,0 +1,7 @@
+
+<form action="{% url 'bookCab' route=0 cabDate=0 %}" method="GET">
+    <label >Date: </label>
+    <input type="date"  name="cabDate">
+    <input type="submit">
+    {% csrf_token %}
+  </form>

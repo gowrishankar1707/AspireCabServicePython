@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'MasterApp.apps.MasterappConfig',
     'AdminOperations.apps.AdminoperationsConfig',
     'phonenumber_field',
+    'UserOperations.apps.UseroperationsConfig',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [
