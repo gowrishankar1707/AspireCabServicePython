@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from MasterApp import models
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 import sys
 
 # Create your views here.
@@ -36,13 +37,18 @@ def bookCab(request,route,cabDate):
         print(f"{request.user.id}")
         print(route)
         print(cabDate)
-        bookedRoute=models.Route.objects.filter(id=route)
-        routeList=models.Route.objects.all()
+        bookedRoute=models.Route.objects.get(id=route)
+        """userReObject=models.UserRegistration.objects.get(id=request.user.id)"""
+        bookedShift=list(models.Route.objects.filter(id=route).values_list('shift'))[0][0]
+        cabBookObj=models.CabBooking(userRe=User.objects.get(id=request.user.id),route=bookedRoute,shift=bookedShift,bookedDate=cabDate)
+        cabBookObj.save()
+
+        """routeList=models.Route.objects.all()
         for route in routeList:
             bookedSeats.update({str(route):models.CabBooking.objects.filter(bookedDate=cabDate,route=route,isCancelled=False).count()})
         
         print(list(bookedRoute))
-        return render(request,"bookCabHtml.html",context={"routeList":routeList,"cabDate":cabDate,"bookedSeats":bookedSeats})
+        return render(request,"bookCabHtml.html",context={"routeList":routeList,"cabDate":cabDate,"bookedSeats":bookedSeats})"""
     else:
         cabDate = ""
         bookedSeats={}

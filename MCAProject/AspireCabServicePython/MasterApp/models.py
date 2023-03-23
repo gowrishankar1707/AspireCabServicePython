@@ -45,14 +45,15 @@ class Route(models.Model):
     
 
 class CabBooking(models.Model):
-    userRe=models.ForeignKey(UserRegistration,on_delete=models.CASCADE,blank=True)
+    userRe=models.ForeignKey(User,on_delete=models.CASCADE,blank=True)
     route=models.ForeignKey(Route,on_delete=models.CASCADE)
     shift=models.CharField(max_length=10,blank=True)
     isCancelled=models.BooleanField(blank=True,default=False)
+    isCompleted=models.BooleanField(blank=True,default=False)
     bookedDate=models.DateField(blank=True)
 
     def __str__(self) -> str:
-        return self.userRe.user.username+"_"+self.bookedDate.strftime('%Y-%m-%d')+"_"+self.shift
+        return self.userRe.username+"_"+self.bookedDate.strftime('%Y-%m-%d')+"_"+self.shift
 
 
 
