@@ -1,0 +1,12 @@
+{% extends 'baseHtml.html' %}
+{% block content %}
+{% if cabSeatingSuccessMessage %}
+<div class="alert alert-success">
+    <strong>Success!</strong> {{ cabSeatingSuccessMessage }}
+  </div>
+{% endif %}
+
+<a href="{% url 'masterApp' %}" type="button" class="btn btn-primary">Back To Main Page</a>
+    
+
+{% endblock %}

@@ -4,10 +4,18 @@
 {% block content %}
 {% include 'getDay.html' %}
 
+{% if bookSeatsErrorMsg %}
+<div class="alert alert-warning">
+  <strong>Warning!</strong> {{ bookSeatsErrorMsg }}
+</div>
+{% endif %}
+
+
 {% if routeList|length > 0 and bookedSeats|length > 0 and cabDate|length > 0%}
 <div class="container">
     <h1>{{ cabDate }}</h1>
   </div>
+
 
   
     

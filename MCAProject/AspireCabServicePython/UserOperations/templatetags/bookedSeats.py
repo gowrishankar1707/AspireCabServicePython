@@ -15,3 +15,7 @@ def bookedSeatNo(dictionary,key):
     noOfSeatsBooked=int(dictionary[key])
     return noOfActualSeats-noOfSeatsBooked
     
+
+
+
+    

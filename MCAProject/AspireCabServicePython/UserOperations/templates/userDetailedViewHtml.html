@@ -1,0 +1,48 @@
+{% extends 'baseHtml.html' %}
+{% load static %}
+{% block content %}
+    <div class="container" style="width: 50%; height: 50%">
+        <img src="{% static 'AspireDesktopImage.png' %}" style="margin-left: 38%" >
+    </div>
+
+    <table class="table table-bordered" style="width: 50%; margin-left: auto; margin-right: auto; text-align: center">
+        <tbody>
+          <tr>
+            <td>UserName</td>
+            <td>{{ userDetailedViewByUserObject.username }}</td>
+          </tr>
+          <tr>
+            <td> FirstName</td>
+            <td>{{ userDetailedViewByUserObject.first_name }}</td>
+          </tr>
+          <tr>
+            <td>LastName</td>
+            <td>{{ userDetailedViewByUserObject.last_name }}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{ userDetailedViewByUserObject.email }}</td>
+          </tr>
+          <tr>
+            <td>DOB</td>
+            <td>{{ userReObject.DOB }}</td>
+          </tr>
+          <tr>
+            <td>PhoneNumber</td>
+            <td>{{ userReObject.phoneNumber }}</td>
+          </tr>
+          <tr>
+            <td> Address </td>
+            <td>{{ userReObject.Address }}</td>
+          </tr>
+          <tr>
+            <td><a href={% url 'masterApp' %} type="button" class="btn btn-primary" style="margin-left: auto; margin-right: auto;">Back To Main Page</a></td>
+            <td><a href={% url 'updateUserDetailFunc' userObj=request.user.id  %} type="button" class="btn btn-warning" style="margin-left: auto; margin-right: auto;">Update</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
+{% endblock %}

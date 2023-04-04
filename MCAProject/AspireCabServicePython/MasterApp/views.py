@@ -3,7 +3,7 @@ from django.template import loader
 from django.http import HttpResponse
 from .models import UserRegistration
 
-def masterApp(request):
+def masterApp(request,**kwargs):
     return render(request,'baseHtml.html')
 
 def helpPage(request):
